@@ -11,12 +11,6 @@
 ## Example of interaction
 
 MQTT
-execute color effect
-* payload -> { "color": "00ffff", sec : 5}
-
-execute color effect and play song
-* payload -> { "color": "00ffff", sec : 5, song: 1, volume: 30 }
-
 click the SETUP PIN -> ESP01 GPIO0
 * payload ->  { click:1, sec: 1 }
 
