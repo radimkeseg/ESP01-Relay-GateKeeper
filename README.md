@@ -8,6 +8,10 @@
  * PubSub (mqtt)
  * ArduinoJson (JsonParser)
 
+## Configure
+<img width="347" height="403" alt="image" src="https://github.com/user-attachments/assets/6410ea4f-0626-4774-bd67-da337f7a09ac" />
+
+
 ## Example of interaction
 
 MQTT
