@@ -1,3 +1,4 @@
+#include "coredecls.h"
 /**The MIT License (MIT)
 
 Copyright (c) 2021 by Radim Keseg
@@ -88,13 +89,19 @@ void MyWifi::setActionHandler(fncHandleAction fActionHandler){
   this->fActionHandler = fActionHandler;
 }
 
-void MyWifi::restart(unsigned int inSec){
+void MyWifi::reset(unsigned int inSec){
     delay(inSec*1000);
     //reset and try again, or maybe put it to deep sleep
     pinMode(0, OUTPUT);   
     digitalWrite(0,HIGH);  //from some reason this has to be set before reset|restart https://github.com/esp8266/Arduino/issues/1017
     ESP.reset();
     delay(5000);  
+}
+
+void MyWifi::restart(unsigned int inSec){
+  delay(inSec*1000);
+  ESP.restart();
+  esp_yield();
 }
 
 void MyWifi::forceManualConfig(const char* APname){
@@ -158,8 +165,8 @@ void MyWifi::setup(const char* APname, int timeout_in_sec){
       //user setting handling
       server->on("/", std::bind(&MyWifi::handle_root, this));
       server->on("/settings", std::bind(&MyWifi::handle_store_settings,this)); 
-//      server->on("/data",  std::bind(&MyWifi::handle_data,this)); 
-//      server->on("/action",std::bind(&MyWifi::handle_action,this)); 
+      server->on("/data",  std::bind(&MyWifi::handle_data,this)); 
+      server->on("/action",std::bind(&MyWifi::handle_action,this)); 
     
       server->begin(); 
     

@@ -82,6 +82,7 @@ public:
     delete httpUpdater;
   }
 
+  void reset(unsigned int inSec = 3);
   void restart(unsigned int inSec = 3);
   void forceManualConfig(const char* APname);
 

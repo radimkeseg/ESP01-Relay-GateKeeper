@@ -68,6 +68,14 @@ static void publish(pubeeStates status){
 bool action = false;
 Interval ActionInterval;
 
+static String stFncHandleAction(){ 
+  if(myWifi.getServer().arg("restart")!=NULL){
+    myWifi.restart(1); //restart in 1 sec
+  }
+  
+  return "OK";
+}
+
 #include <ArduinoJson.h>
 static String stHandleSubCallback(char* topic, byte* payload, unsigned int length){
   StaticJsonDocument<1024> doc;  //should be set dynamic, maybe later 255 should be enough
@@ -104,6 +112,7 @@ void setup() {
   //Serial.begin(115200);
 
   myWifi.setup(AP_NAME,60); //1 min to configure the WIFI 
+  myWifi.setActionHandler( stFncHandleAction );
   myWifi.getCustomSettings().print();
 
   if(myWifi.getCustomSettings().settings.MQTT){
