@@ -67,10 +67,18 @@ static void publish(pubeeStates status){
 /* webserver handlers */
 bool action = false;
 Interval ActionInterval;
+bool restart = false;
 
 static String stFncHandleAction(){ 
   if(myWifi.getServer().arg("restart")!=NULL){
-    myWifi.restart(1); //restart in 1 sec
+    restart = true;
+  }
+
+  if(myWifi.getServer().arg("click")!=NULL){
+    digitalWrite(SETUP_PIN, LOW); 
+    delay(20);
+    action = true;
+    ActionInterval.set( 1000 );
   }
   
   return "OK";
@@ -155,5 +163,8 @@ void loop() {
     publish(ps);
   else
    publish(IDLE);
+
+  if(restart) myWifi.restart(1); //restart in 1 sec
+
   delay(fast?100:200);
 }
