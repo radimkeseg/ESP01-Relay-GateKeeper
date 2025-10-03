@@ -154,7 +154,7 @@ void MyWifi::setup(const char* APname, int timeout_in_sec){
   //here  "AutoConnectAP"
   //and goes into a blocking loop awaiting configuration
   if(!wifiManager->autoConnect( hostname.c_str() ) ){
-    //restart(); //no wifi mode - uncomment the restart() if endess retry is needed
+    restart(); //no wifi mode - uncomment the restart() if endless retry is needed
   }else{     
       // OTA Setup
       WiFi.hostname(hostname);

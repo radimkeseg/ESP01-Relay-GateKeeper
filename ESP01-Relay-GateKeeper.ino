@@ -119,7 +119,7 @@ static String stHandleSubCallback(char* topic, byte* payload, unsigned int lengt
 void setup() {
   //Serial.begin(115200);
 
-  myWifi.setup(AP_NAME,60); //1 min to configure the WIFI 
+  myWifi.setup(AP_NAME,180); //1 min to configure the WIFI 
   myWifi.setActionHandler( stFncHandleAction );
   myWifi.getCustomSettings().print();
 
